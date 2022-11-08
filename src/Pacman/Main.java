@@ -1,129 +1,28 @@
 package Pacman;
 
+import server.Server;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 import java.awt.*;
+import java.io.IOException;
 import javax.swing.*;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 /*
   Тут реализуетьса оконый интерфейс
  */
-class Main {
-    public static void main(String[] args) {
-        MyFrame mf = new MyFrame();
+public class Main {
+    static public MyFrame mf;
+    public static void main(String[] args) throws InterruptedException, IOException {
+        mf = new MyFrame();
+        Server.start();
     }
 }
-// клас основного окна, используется swing так как там при  вызове repeint() перерисовуется не все окно
-class MyFrame extends JFrame implements  KeyListener{
-    JMenuBar jm;
-    public MyFrame() {
-        super();
-        setSize(800+22, 600+56+17);
-        setLocation(200, 100);
-        setBackground(new Color(255, 255, 255));
-        setLayout (null);
-        MyFrame th = this;
-        // Создание меню
-        JMenuBar jmenubar = new JMenuBar();
-        JMenu info = new JMenu("info");
-        jmenubar.add (info);
-        JMenuItem open = info.add (new JMenuItem("open"));
-        open.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                 InfoFrame inf =new InfoFrame(th);
-            }
-        });
-        JMenu ad = new JMenu("add");
-        jmenubar.add (ad);
-        JMenuItem poligon = ad.add (new JMenuItem("poligon"));
-        poligon.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                PoliFrame inf =new PoliFrame(th);
-            }
-        });
-        setJMenuBar (jmenubar);
-        this.jm=jmenubar;
-        getContentPane().addKeyListener (this);
-        getContentPane().setFocusable(true);
-        getContentPane().revalidate();
-        setVisible(true);
-    }
-     Screen scr = new Screen(this);
-    public void paint (Graphics g) {
-        //в потоке ресуем кадр
-       MyThread pain = new MyThread("1");
-       pain.run(g,scr);
-        // ресуем меню, так как после вызова repeint() элементы окна не ресуются
-       jm.repaint();
-   }
-    public void windowClosing(WindowEvent we) {
-        System.exit(0);
-    }
-    public void windowClosed(WindowEvent we){};
-    public void windowOpened(WindowEvent we) {};
-    public void windowActivated(WindowEvent we){};
-    public void windowIconified(WindowEvent we){};
-    public void windowDeiconified(WindowEvent we){};
-    public void windowDeactivated(WindowEvent we){};
-    public void keyPressed(KeyEvent e){
-      //  управление
-      double x,z,y,xt,zt,yt,v;
-      v=10;
-      x=0; y=0; z=0;
-        if (e.getKeyChar() == 'e') {
-            if (scr.back==Color.white)
-                scr.back=new Color(255,255,255);
-            else scr.back=Color.white;
-            if (scr.l==100000000)
-                scr.l=5000;
-            else scr.l=100000000;;
-        }
-     if (e.getKeyChar() == 'w') {
-            x=0; y=0; z=2;
-        }
-     if (e.getKeyChar() == 's') {
-         x=0; y=0; z=-2;
-     }
-     if (e.getKeyChar() == 'd') {
-         x=2; y=0; z=0;
-     }
-     if (e.getKeyChar() == 'a') {
-         x=-2; y=0; z=0;
-     }
-     if (e.getKeyChar() == ' ') {
-         x=0; y=-1; z=0;
-     }
-     if (e.getKeyCode() == 16) {
-         x=0; y=1; z=0;
-     }
-     if (e.getKeyCode() == 37) {
-            scr.c.Ay = scr.c.Ay + 0.05;
-     }
-     if (e.getKeyCode() == 39) {
-            scr.c.Ay = scr.c.Ay - 0.05;
-     }
-     if (e.getKeyCode() == 38) {
-            scr.c.Ax = scr.c.Ax + 0.05;
-     }
-     if (e.getKeyCode() == 40) {
-            scr.c.Ax = scr.c.Ax - 0.05;
-     }
-       //реализация движения с учетом напровления камеры
-        xt=x; zt=z;
-        x=xt*Math.cos(-scr.c.Ay)+zt*Math.sin(-scr.c.Ay);
-        z=-xt*Math.sin(-scr.c.Ay)+zt*Math.cos(-scr.c.Ay);
-        scr.c.x = scr.c.x+x*v;
-        scr.c.y = scr.c.y+y*v;
-        scr.c.z = scr.c.z+z*v;
-        repaint ();
-    }
-    public void keyReleased(KeyEvent e){}
-    public void keyTyped(KeyEvent e){}
-}
+
 //Клас окна с информациией
 class InfoFrame extends JFrame {
     MyFrame mf;
