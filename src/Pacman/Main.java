@@ -73,9 +73,10 @@ class PoliFrame extends JFrame {
         JButton mb1 = new JButton();
         mb1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                    mf.scr.n = mf.scr.n+1;
-                    mf.scr.p[mf.scr.n-1] = new Poligon(Integer.valueOf(x1.getText()),Integer.valueOf(y1.getText()),Integer.valueOf(z1.getText()),Integer.valueOf(x2.getText()),Integer.valueOf(y2.getText()),Integer.valueOf(z2.getText()),Integer.valueOf(x3.getText()),Integer.valueOf(y3.getText()),Integer.valueOf(z3.getText()),
-                            new Color (Integer.valueOf(r.getText()),Integer.valueOf(g.getText()),Integer.valueOf(b.getText())));
+                    mf.addPolygon(Integer.valueOf(x1.getText()),Integer.valueOf(y1.getText()),Integer.valueOf(z1.getText()),
+                            Integer.valueOf(x2.getText()),Integer.valueOf(y2.getText()),Integer.valueOf(z2.getText()),
+                            Integer.valueOf(x3.getText()),Integer.valueOf(y3.getText()),Integer.valueOf(z3.getText()),
+                            Integer.valueOf(r.getText()),Integer.valueOf(g.getText()),Integer.valueOf(b.getText()));
             }
         });
         con.add(mb1);

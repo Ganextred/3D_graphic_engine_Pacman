@@ -64,9 +64,15 @@ public class Server {
                                         Thread.sleep(100);
                                     }
                                     System.out.println(c + "c");
-                                    out.write("Виконана команда ппереміщення " );
+                                    out.write("Виконана команда переміщення " );
                                 }
                                 break;
+                                case 100:
+                                    System.out.println(command.data.subList(command.processedData, command.processedData+12));
+                                    Pacman.Main.mf.addPolygon(command.data.subList(command.processedData, command.processedData+12));
+                                    command.processedData += 12;
+                                    out.write("Додан полігон " );
+                                    break;
                                 case 1:
                                     out.write("К25 Ротань Ілля ");
                                     break;
@@ -78,7 +84,7 @@ public class Server {
                                     throw new IllegalArgumentException();
                             }
                         }
-                        logger.log(Level.FINE, "command: " + c );
+                        logger.log(Level.FINE,  command.toString() );
                     } catch (AssertionError e) {
                         out.write("Невірна кількість команд ");
                     } catch (NumberFormatException e) {

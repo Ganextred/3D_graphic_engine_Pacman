@@ -3,6 +3,7 @@ package Pacman;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.List;
 
 // клас основного окна, используется swing так как там при  вызове repeint() перерисовуется не все окно
 public class MyFrame extends JFrame implements KeyListener {
@@ -165,5 +166,22 @@ public class MyFrame extends JFrame implements KeyListener {
             scr.c.z = scr.c.z + z * v;
             repaint();
         }
+    }
+
+    public void addPolygon(Integer x1,Integer y1, Integer z1,
+    Integer x2,Integer y2, Integer z2,
+    Integer x3,Integer y3, Integer z3,
+    Integer r,Integer g, Integer b){
+        scr.n = scr.n+1;
+        scr.p[scr.n-1] = new Poligon(x1,y1,z1,x2,y2,z2,x3,y3,z3,
+                new Color (r,g,b));
+        repaint();
+    }
+    public void addPolygon(java.util.List<Integer> d){
+        assert d.size() == 12;
+        scr.n = scr.n+1;
+        scr.p[scr.n-1] = new Poligon(d.get(0),d.get(1),d.get(2),d.get(3),d.get(4),d.get(5),
+                d.get(6),d.get(7),d.get(8), new Color (d.get(9),d.get(10),d.get(11)));
+        repaint();
     }
 }
