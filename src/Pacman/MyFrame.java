@@ -46,8 +46,8 @@ public class MyFrame extends JFrame implements KeyListener {
 
     public void paint(Graphics g) {
         //в потоке ресуем кадр
-        MyThread pain = new MyThread("1");
-        pain.run(g, scr);
+        MyThread pane = new MyThread("1");
+        pane.run(g, scr);
         // ресуем меню, так как после вызова repeint() элементы окна не ресуются
         jm.repaint();
     }
