@@ -24,8 +24,6 @@ public class Command {
 
     private void parseHeader(String word) {
         String[] splitedWord = word.split(" +");
-        for(int i = 0; i<splitedWord.length; i++)
-            System.out.println(splitedWord[i]);
         length = Byte.parseByte(splitedWord[0]);
         assertTrue(length == splitedWord.length-1);
         commands = new ArrayList<>(length);
