@@ -1,8 +1,15 @@
 package Pacman;
 
+
 //test commit
 
 import java.awt.*;
+
+
+//server commit
+
+//resolved merge
+
 
 class MyThread extends Thread {
     public MyThread(String name){
