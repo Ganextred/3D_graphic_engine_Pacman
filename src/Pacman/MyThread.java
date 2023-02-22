@@ -1,5 +1,7 @@
 package Pacman;
 
+//test commit
+
 import java.awt.*;
 
 class MyThread extends Thread {
